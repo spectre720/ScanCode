@@ -6,6 +6,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:go_router/go_router.dart';
 import 'package:share/share.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 class GeneralNav extends StatefulWidget {
    const GeneralNav({
     required this.child,
@@ -42,7 +43,7 @@ class GeneralNav extends StatefulWidget {
 
 class _GeneralNavState extends State<GeneralNav> {
 
-
+  late final WebViewController controller;
 
   Widget build(BuildContext context) {
 
@@ -72,8 +73,8 @@ class _GeneralNavState extends State<GeneralNav> {
             //onTap:() => context.go('/HomePage'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.library_music),
-            label: 'e-Music',
+            icon: Icon(Icons.shopping_cart),
+            label: 'eMarket',
             //onTap:() => context.go('/TeamsPage'),
           ),
 
@@ -157,16 +158,122 @@ class _MyAnimatedDrawerState extends State<MyAnimatedDrawer> {
             title: const Text('About Us', style: TextStyle(color: Colors.white,fontSize: 18),),
             leading: Icon(Icons.bookmarks_outlined,color: Colors.green[700]),
             onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+
+                    return Scaffold(
+
+                      appBar: AppBar(
+                        title: Row(
+                          children: [
+                            Image.asset(
+                              'assets/icons/Screenshot_20230815-234221_ScanCode.jpg',
+                              width: 25,
+                              height: 25,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Text('ScanCode'),
+                          ],
+                        ),
+
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                      ),
+                      body:SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 10,),
+                            Container(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text('About ScanCode Tanzania',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.green[700]),)),
+                            Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Text('We are an ICT company embarking on consumer products verification and authentic data accessibility through mobile devices '
+                                  '. Scancode (T) Limited established in 2014 owned by young innovative Tanzanian vetted by commission of Science and Technology (COSTECH)',style: TextStyle(fontSize: 15,),textAlign: TextAlign.justify),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Text('We have developed a mobile platform that empowers consumers to verify product authenticity through scanning barcodes and Qrcodes using '
+                                  'their smartphones. the mobile platform enables the consumer to scan both the QRcodes and Barcodes and go beyond the label to discover '
+                                  'more informations about where the product comes from. How it was processed, ingredients , storage, quality and availability. And we have embeded the mobile app with emarket system where '
+                                  'the entrepreneurs register their businesses and products.',style: TextStyle(fontSize: 15),textAlign: TextAlign.justify),
+                            ),Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Text('Data quality is particularly important when it comes to health, nutrition and  product safety issues. In this view ,COSTECH has carefully assessed'
+                                  'and vetted the platform and confirmed that it meets international standards while fitting perfectly dynamics of our local environment. The platforms set to'
+                                  'address a pertinent challenge of counterfeit products in our Tanzanian market.',style: TextStyle(fontSize: 15),textAlign: TextAlign.justify),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Text('The platform improves the government capability of protecting consumers from using counterfeit \'fake\' products especially for medicine or drugs , cosmetics'
+                                  'and food stuffs meanwhile reduces products fraud in the market. Hence maintains consumers confidence and healthy living.',style: TextStyle(fontSize: 15),textAlign: TextAlign.justify),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Text('We are calling on all manufacturers and stakeholders to get involved in using the platform to create '
+                                  'deeper brand relationships, grow product market share with brands strengths and visibility.',style: TextStyle(fontSize: 15),textAlign: TextAlign.justify),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Text('Our Vision',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green[700]),),
+                            ), Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Text('To become a trusted source of data by providing accurate information about products as a critical part of building trust with consumers and enterprises'
+                                  'while combating counterfeit and product fraud in the market.',style: TextStyle(fontSize: 15,),textAlign: TextAlign.justify),
+                            ), Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Text('Our Mission',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green[700]),),
+                            ),
+                              Container(
+                                padding: EdgeInsets.all( 10),
+                                child: Text('To innovate friendly, provide industry with a significant opportunity to influence consumer behaviour, deliver desirable brand positioning in the marhet place '
+                                    'and demonstrate good corporate responsibility',style: TextStyle(fontSize: 15,),textAlign: TextAlign.justify),
+                              ),
+                            Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Text('Contact Us',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green[700]),),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all( 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('We are at COSTECH (Tume ya Taifa ya Sayansi na Technolojia) 3rd Floor',style: TextStyle(fontSize: 15,),),
+                                  SizedBox(height: 5,),
+                                  Text('Kijitonyama Ali Hassan Mwinyi Road,Dar Es Salaam Tanzania',style: TextStyle(fontSize: 15,),),
+                                  SizedBox(height: 5,),
+                                  Text('Mobile:+255718173700',style: TextStyle(fontSize: 15,),),
+                                  SizedBox(height: 5,),
+                                  Text('Email:mgimbamr@gmail.com , info@scancodetz.com, ceo@scancodetz.com',style: TextStyle(fontSize: 15,),),
+
+                                ],
+                              ),
+                            ),
+                            Container(
+                                padding: EdgeInsets.only(left: 10),
+                                child: GestureDetector(onTap:(){ launch('https://scancode.co.tz/');},
+                                  child: Text('Visit Our Website.',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.green[700]),),
+
+                                )
+                            ),
+
+                          ],
+
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+
               // Handle link 1 tap
             },
           ),
-          // ListTile(
-          //   title: const Text('Settings', style: TextStyle(color: Colors.white,fontSize: 18),),
-          //   leading: Icon(Icons.settings,color: Colors.green[700]),
-          //   onTap: () {
-          //     // Handle link 1 tap
-          //   },
-          // ),
           ListTile(
             title: const Text('Terms of use', style: TextStyle(color: Colors.white,fontSize: 18),),
             leading: Icon(Icons.rule_sharp,color: Colors.green[700]),
@@ -217,10 +324,11 @@ Offered By : ScanCode Tanzania.
 }
 void _shareText(String textToShare) {
   try {
-    Share.share(textToShare, subject: 'Sharing Example');
+    Share.share(textToShare, subject: 'ScanCode Viwango');
   } catch (e) {
     print('Error sharing: $e');
 
   }
 }
+
 

@@ -1,6 +1,9 @@
 // ignore_for_file: camel_case_types
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scancode/Screens/eMusic.dart';
 import 'package:scancode/Screens/scanIn.dart';
@@ -12,7 +15,15 @@ GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellNavigatorKey =
 GlobalKey<NavigatorState>(debugLabel: 'shell');
 void main() {
-  runApp(const landing_Page());
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  // Create a timer to wait for 3 seconds before running the app.
+  Timer(Duration(seconds: 1), () {
+    FlutterNativeSplash.remove();
+    runApp(const landing_Page());
+  });
+
 }
 
 final GoRouter _router = GoRouter(
@@ -48,7 +59,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: '/eMusic',
           builder: (BuildContext context, GoRouterState state) {
-            return const eMusic();
+            return const eMarketing();
           },
           routes: <RouteBase>[
             // The details screen to display stacked on the inner Navigator.
@@ -56,7 +67,7 @@ final GoRouter _router = GoRouter(
             GoRoute(
               path: 'eMusic',
               builder: (BuildContext context, GoRouterState state) {
-                return const eMusic();
+                return const eMarketing();
               },
             ),
           ],
