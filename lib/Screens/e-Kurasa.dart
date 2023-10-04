@@ -703,6 +703,7 @@ class _eKurasaState extends State<eKurasa> {
 
               scannedData = barcodeScanResult;
               deviceInfo().printDeviceDetails();
+              userLocation().updatePosition();
 
 
 
@@ -905,7 +906,13 @@ class _eKurasaState extends State<eKurasa> {
           }
         },
         tooltip: 'Scan now',
-        child: const Icon(Icons.qr_code),
+        child: Column(
+          children: [
+            SizedBox(height: 7,),
+            const Icon(Icons.qr_code),
+            Text('Scan'),
+          ],
+        ),
       ),
 
 

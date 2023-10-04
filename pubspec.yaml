@@ -52,6 +52,8 @@ dependencies:
   flutter_native_splash: ^2.2.19
   flutter_phone_direct_caller: ^2.1.1
   device_info: ^2.0.3
+  geocoding: ^2.1.0
+  geolocator: ^10.1.0
 
 dependency_overrides:
   html: ^0.15.0
